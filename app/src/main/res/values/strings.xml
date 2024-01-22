@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CustoDeViagem</string>
+    <string name="title">Custo de Viagem</string>
+    <string name="calculate">Calcular</string>
+    <string name="result">Resultado</string>
+    <string name="consume">Consumo</string>
+    <string name="price">Preço</string>
+    <string name="distance">Distância</string>
+    <string name="initial_result">0</string>
+</resources>
