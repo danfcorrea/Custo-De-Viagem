@@ -8,43 +8,62 @@ import com.google.android.material.textview.MaterialTextView
 
 class MainActivity : AppCompatActivity() {
 
-    private var distanceValue: Double = 0.0
-    private var priceValue: Double = 0.0
-    private var consumeValue: Double = 0.0
+    private var distanceValue: Double? = null
+    private var priceValue: Double? = null
+    private var consumeValue: Double? = null
+    private lateinit var distance: TextInputLayout
+    private lateinit var price: TextInputLayout
+    private lateinit var consume: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        distance = findViewById(R.id.distance)
+        price = findViewById(R.id.price)
+        consume = findViewById(R.id.consumption)
+
         val calcButton = findViewById<Button>(R.id.calc)
         calcButton.setOnClickListener { click() }
+
     }
 
     private fun click() {
-        loadValues()
-        returnValues(
-            findViewById(R.id.result),
-            String.format("%.2f", calculate(distanceValue, priceValue, consumeValue))
-        )
+        if(loadValues()){
+            returnValues(
+                findViewById(R.id.result),
+                String.format("%.2f", calculate(distanceValue!!, priceValue!!, consumeValue!!))
+            )
+        }
     }
 
     private fun calculate(distance: Double, price: Double, consume: Double): Double {
         return distance / consume * price
     }
 
-    private fun loadValues() {
-        distanceValue = findViewById<TextInputLayout>(R.id.distance)
-            .editText?.text.toString().replace(',', '.').toDouble()
-        priceValue = findViewById<TextInputLayout>(R.id.price)
-            .editText?.text.toString().replace(',', '.').toDouble()
-        consumeValue = findViewById<TextInputLayout>(R.id.consumption)
-            .editText?.text.toString().replace(',', '.').toDouble()
+    private fun loadValues(): Boolean {
+        distanceValue = distance.editText?.text.toString().replace(',', '.').toDoubleOrNull()
+        priceValue = price.editText?.text.toString().replace(',', '.').toDoubleOrNull()
+        consumeValue = consume.editText?.text.toString().replace(',', '.').toDoubleOrNull()
+        checkFields(distance, price, consume)
+        return !(distanceValue == null || priceValue == null || consumeValue == null)
     }
 
     private fun returnValues(view: MaterialTextView, valor: String) {
         view.text = buildString {
+            append("R$ ")
             append(valor)
-            append(" R$")
+        }
+    }
+
+    private fun checkFields(vararg view: TextInputLayout){
+        for(v in view){
+            if(v.editText?.text.toString().toDoubleOrNull() == null){
+                v.error = getString(R.string.error)
+                v.editText!!.text.clear()
+            }else{
+                v.error = null
+            }
         }
     }
 
