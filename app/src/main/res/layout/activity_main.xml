@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/title"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -112,10 +112,11 @@
                     android:id="@+id/result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/initial_result"
                     android:layout_marginBottom="8dp"
+                    android:text="@string/initial_result"
+                    android:textColor="@color/md_theme_primary"
                     android:textSize="24sp"
-                    android:textColor="@color/md_theme_secondary"
+                    app:fontFamily="sans-serif-black"
                     tools:ignore="RelativeOverlap" />
             </LinearLayout>
 
