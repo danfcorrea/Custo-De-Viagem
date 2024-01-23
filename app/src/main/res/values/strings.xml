@@ -2,10 +2,10 @@
     <string name="app_name">Custo De Viagem</string>
     <string name="title">Custo de Viagem</string>
     <string name="calculate">Calcular</string>
-    <string name="result">Resultado</string>
+    <string name="result">Seu gasto total será de:</string>
     <string name="consume">Consumo (Km/L)</string>
     <string name="price">Preço (R$)</string>
     <string name="distance">Distância (Km)</string>
-    <string name="initial_result">0</string>
+    <string name="initial_result">R$ 0</string>
     <string name="error">*Valor inválido</string>
 </resources>
