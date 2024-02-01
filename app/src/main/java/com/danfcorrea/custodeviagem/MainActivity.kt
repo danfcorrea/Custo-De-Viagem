@@ -2,6 +2,7 @@ package com.danfcorrea.custodeviagem
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun click() {
         if(loadValues()){
             returnValues(
-                findViewById(R.id.result),
+                findViewById(R.id.result),findViewById(R.id.resultText),
                 String.format("%.2f", calculate(distanceValue!!, priceValue!!, consumeValue!!))
             )
         }
@@ -49,11 +50,14 @@ class MainActivity : AppCompatActivity() {
         return !(distanceValue == null || priceValue == null || consumeValue == null)
     }
 
-    private fun returnValues(view: MaterialTextView, valor: String) {
+    private fun returnValues(view: MaterialTextView, text: MaterialTextView, valor: String) {
+        view.visibility = View.VISIBLE
+        text.visibility = View.VISIBLE
         view.text = buildString {
             append("R$ ")
             append(valor)
         }
+
     }
 
     private fun checkFields(vararg view: TextInputLayout){
