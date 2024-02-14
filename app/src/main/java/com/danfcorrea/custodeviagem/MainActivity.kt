@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
 
@@ -20,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        distance = findViewById(R.id.distance)
-        price = findViewById(R.id.price)
-        consume = findViewById(R.id.consumption)
+        distance = findViewById(R.id.input_distance)
+        price = findViewById(R.id.input_price)
+        consume = findViewById(R.id.Input_autonomy)
 
-        val calcButton = findViewById<Button>(R.id.calc)
+        val calcButton = findViewById<Button>(R.id.button_calculate)
         calcButton.setOnClickListener { click() }
 
     }
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun click() {
         if(loadValues()){
             returnValues(
-                findViewById(R.id.result),findViewById(R.id.resultText),
+                findViewById(R.id.text_result),findViewById(R.id.linear_result),
                 String.format("%.2f", calculate(distanceValue!!, priceValue!!, consumeValue!!))
             )
         }
@@ -50,10 +51,9 @@ class MainActivity : AppCompatActivity() {
         return !(distanceValue == null || priceValue == null || consumeValue == null)
     }
 
-    private fun returnValues(view: MaterialTextView, text: MaterialTextView, valor: String) {
+    private fun returnValues(text: MaterialTextView, view: LinearLayout, valor: String) {
         view.visibility = View.VISIBLE
-        text.visibility = View.VISIBLE
-        view.text = buildString {
+        text.text = buildString {
             append("R$ ")
             append(valor)
         }
