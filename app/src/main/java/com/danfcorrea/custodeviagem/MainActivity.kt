@@ -44,11 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadValues(): Boolean {
-        distanceValue = distance.editText?.text.toString().replace(',', '.').toDoubleOrNull()
+        distanceValue = distance.editText?.text.toString() .replace(',', '.').toDoubleOrNull()
         priceValue = price.editText?.text.toString().replace(',', '.').toDoubleOrNull()
         consumeValue = consume.editText?.text.toString().replace(',', '.').toDoubleOrNull()
         checkFields(distance, price, consume)
-        return !(distanceValue == null || priceValue == null || consumeValue == null)
+        return !(distanceValue == null || distanceValue == 0.0 ||
+                priceValue == null || priceValue == 0.0 ||
+                consumeValue == null || consumeValue == 0.0)
     }
 
     private fun returnValues(text: MaterialTextView, view: LinearLayout, valor: String) {
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkFields(vararg view: TextInputLayout){
         for(v in view){
-            if(v.editText?.text.toString().toDoubleOrNull() == null){
+            if(v.editText?.text.toString().toDoubleOrNull() == null || v.editText?.text.toString().toDoubleOrNull() == 0.0){
                 v.error = getString(R.string.error)
                 v.editText!!.text.clear()
             }else{
